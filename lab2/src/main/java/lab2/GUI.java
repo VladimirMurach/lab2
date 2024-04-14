@@ -12,10 +12,12 @@ import java.awt.Font;
  */
 public class GUI extends javax.swing.JFrame {
 
+    Manager manager;
     /**
      * Creates new form GUI
      */
     public GUI() {
+        manager = new Manager();
         initComponents();
         Font font = new Font("Font", Font.PLAIN, 24);
         importButton.setFont(font);
@@ -99,11 +101,11 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
-        // TODO add your handling code here:
+        manager.importFile();
     }//GEN-LAST:event_importButtonActionPerformed
 
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
-        // TODO add your handling code here:
+        manager.exportFile();
     }//GEN-LAST:event_exportButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
