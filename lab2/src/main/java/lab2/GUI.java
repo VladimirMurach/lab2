@@ -5,6 +5,11 @@
 package lab2;
 
 import java.awt.Font;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
  *
@@ -12,11 +17,14 @@ import java.awt.Font;
  */
 public class GUI extends javax.swing.JFrame {
 
-    Manager manager;
+    private Manager manager;
+    private JFileChooser fileChooser;
+
     /**
      * Creates new form GUI
      */
     public GUI() {
+        fileChooser = new JFileChooser();
         manager = new Manager();
         initComponents();
         Font font = new Font("Font", Font.PLAIN, 24);
@@ -99,13 +107,25 @@ public class GUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
-        manager.importFile();
+        fileChooser.setDialogTitle("Выбор файла");
+        int result = fileChooser.showOpenDialog(GUI.this);
+        try {
+            manager.importFile(fileChooser.getSelectedFile());
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidFormatException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_importButtonActionPerformed
 
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
-        manager.exportFile();
+        try {
+            manager.exportFile();
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_exportButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
