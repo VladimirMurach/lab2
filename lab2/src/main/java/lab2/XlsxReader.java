@@ -38,6 +38,8 @@ public class XlsxReader {
                 i++;
             }
         }
+        fis.close();
+        workbook.close();
         return data;
     }
 
@@ -56,6 +58,7 @@ public class XlsxReader {
             names.add(cell.getStringCellValue());
         }
         workbook.close();
+        fis.close();
         return names;
     }
     

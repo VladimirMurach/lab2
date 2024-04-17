@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import org.apache.poi.ooxml.POIXMLException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.exceptions.NotOfficeXmlFileException;
 
 /**
  *
@@ -188,7 +190,9 @@ public class GUI extends javax.swing.JFrame {
         try {
             manager.exportFile();
         } catch (IOException ex) {
-            
+            System.out.println("Ошибка ввода/вывода");
+        } catch (NullPointerException e) {
+            System.out.println("Сначала импортируйте файл");
         }
     }//GEN-LAST:event_exportButtonActionPerformed
 
@@ -215,12 +219,18 @@ public class GUI extends javax.swing.JFrame {
         textField.setText("");
         try {
             manager.importFile(fileChooser.getSelectedFile());
+        } catch (NotOfficeXmlFileException | POIXMLException e) {
+            System.out.println("Выбран не Excel файл");
         } catch (IOException ex) {
-            
+            System.out.println("Ошибка ввода/вывода");
+        } catch (NullPointerException e) {
+            System.out.println("Не выбран файл или листа не существует");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Листа не существует");
         } catch (InvalidFormatException ex) {
-            
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**
