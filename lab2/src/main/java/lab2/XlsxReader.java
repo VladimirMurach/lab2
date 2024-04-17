@@ -14,10 +14,15 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class XlsxReader {
 
-    public ArrayList<DescriptiveStatistics> read(File file) throws IOException, InvalidFormatException {
+    public ArrayList<DescriptiveStatistics> read(File file, String sheetName, int sheetNumber) throws IOException, InvalidFormatException {
         FileInputStream fis = new FileInputStream(file);
         Workbook workbook = new XSSFWorkbook(file);
-        Sheet sheet = workbook.getSheetAt(0);
+        Sheet sheet;
+        if (sheetName == null) {
+            sheet = workbook.getSheetAt(sheetNumber);
+        } else {
+            sheet = workbook.getSheet(sheetName);
+        }
         ArrayList<DescriptiveStatistics> data = new ArrayList<>();
         for (Row row : sheet) {
             int i = 0;
@@ -36,10 +41,15 @@ public class XlsxReader {
         return data;
     }
 
-    public ArrayList<String> readNames(File file) throws IOException, InvalidFormatException {
+    public ArrayList<String> readNames(File file, String sheetName, int sheetNumber) throws IOException, InvalidFormatException {
         FileInputStream fis = new FileInputStream(file);
         Workbook workbook = new XSSFWorkbook(file);
-        Sheet sheet = workbook.getSheetAt(0);
+        Sheet sheet;
+        if (sheetName == null) {
+            sheet = workbook.getSheetAt(sheetNumber);
+        } else {
+            sheet = workbook.getSheet(sheetName);
+        }
         ArrayList<String> names = new ArrayList<>();
         Row row = sheet.getRow(0);
         for (Cell cell : row) {
@@ -48,4 +58,5 @@ public class XlsxReader {
         workbook.close();
         return names;
     }
+    
 }

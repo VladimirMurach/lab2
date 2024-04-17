@@ -6,16 +6,20 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public class Manager {
     
-    Storage storage = new Storage();
-    Calculator calculator = new Calculator();
-    XlsxReader reader = new XlsxReader();
-    XlsxWriter writer = new XlsxWriter();
+    private Storage storage = new Storage();
+    private Calculator calculator = new Calculator();
+    private XlsxReader reader = new XlsxReader();
+    private XlsxWriter writer = new XlsxWriter();
+    private String sheetName = null;
+    private int sheetNumber = 0;
+    
 
     void importFile(File file) throws IOException, InvalidFormatException {
-        storage.setImportData(reader.read(file));
-        storage.setSampleNames(reader.readNames(file));
+        storage.setImportData(reader.read(file, sheetName, sheetNumber));
+        storage.setSampleNames(reader.readNames(file, sheetName, sheetNumber));
         storage.toDoubleArray();
         System.out.println("Импорт завершен!");
+        sheetName = null;
     }
 
     void exportFile() throws IOException {
@@ -28,5 +32,14 @@ public class Manager {
         storage.setExportData(calculator.calculate(storage.getImportData()));
         storage.setCovExportData(calculator.covariance(storage.getCovImportData()));
     }
+
+    public void setSheetName(String sheetName) {
+        this.sheetName = sheetName;
+    }
+
+    public void setSheetNumber(String sheetName) {
+        sheetNumber = Integer.parseInt(sheetName);
+    }
+    
     
 }

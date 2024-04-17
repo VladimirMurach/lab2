@@ -60,7 +60,7 @@ public class XlsxWriter {
             }
         }
         
-        FileOutputStream fos = new FileOutputStream("C:\\Users\\Владимир\\Desktop\\result.xlsx");
+        FileOutputStream fos = new FileOutputStream("result.xlsx");
         workbook.write(fos);
         workbook.close();
     }
