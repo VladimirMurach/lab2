@@ -14,17 +14,19 @@ public class Manager {
     void importFile(File file) throws IOException, InvalidFormatException {
         storage.setImportData(reader.read(file));
         storage.setSampleNames(reader.readNames(file));
+        storage.toDoubleArray();
         System.out.println("Импорт завершен!");
     }
 
     void exportFile() throws IOException {
         calculate();
-        writer.write(storage.getExportData(), storage.getSampleNames());
+        writer.write(storage.getExportData(), storage.getSampleNames(), storage.getCovExportData());
         System.out.println("Экспорт завершен!");
     }
     
     void calculate() {
         storage.setExportData(calculator.calculate(storage.getImportData()));
+        storage.setCovExportData(calculator.covariance(storage.getCovImportData()));
     }
     
 }

@@ -2,6 +2,8 @@ package lab2;
 
 import static java.lang.Math.sqrt;
 import java.util.ArrayList;
+import org.apache.commons.math3.linear.RealMatrix;
+import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 public class Calculator {
@@ -25,6 +27,11 @@ public class Calculator {
             iResult.add(sample.getMean() + 1.96*sample.getStandardDeviation()/sqrt(sample.getN()));
         }
         return result;
+    }
+
+    RealMatrix covariance(double[][] covImportData) {
+        Covariance cov = new Covariance(covImportData);
+        return cov.getCovarianceMatrix();
     }
     
 }

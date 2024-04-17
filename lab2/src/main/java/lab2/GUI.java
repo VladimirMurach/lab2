@@ -110,13 +110,13 @@ public class GUI extends javax.swing.JFrame {
 
     private void importButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importButtonActionPerformed
         fileChooser.setDialogTitle("Выбор файла");
-        int result = fileChooser.showOpenDialog(GUI.this);
+        fileChooser.showOpenDialog(GUI.this);
         try {
             manager.importFile(fileChooser.getSelectedFile());
         } catch (IOException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            
         } catch (InvalidFormatException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }//GEN-LAST:event_importButtonActionPerformed
 

@@ -1,6 +1,7 @@
 package lab2;
 
 import java.util.ArrayList;
+import org.apache.commons.math3.linear.RealMatrix;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 public class Storage {
@@ -8,6 +9,8 @@ public class Storage {
     private ArrayList<DescriptiveStatistics> importData;
     private ArrayList<ArrayList<Double>> exportData;
     private ArrayList<String> sampleNames;
+    private double[][] covImportData;
+    private RealMatrix covExportData;
 
     public ArrayList<String> getSampleNames() {
         return sampleNames;
@@ -32,5 +35,31 @@ public class Storage {
     public void setExportData(ArrayList<ArrayList<Double>> exportData) {
         this.exportData = exportData;
     }
-    
+
+    public double[][] getCovImportData() {
+        return covImportData;
+    }
+
+    public void setCovImportData(double[][] covImportData) {
+        this.covImportData = covImportData;
+    }
+
+    public RealMatrix getCovExportData() {
+        return covExportData;
+    }
+
+    public void setCovExportData(RealMatrix covExportData) {
+        this.covExportData = covExportData;
+    }
+
+    public void toDoubleArray() {
+        covImportData = new double[(int) importData.get(0).getN()][importData.size()];
+        int i = 0;
+        for (DescriptiveStatistics sample : importData) {
+            for (int j = 0; j < sample.getN(); j++) {
+                covImportData[j][i] = sample.getElement(j);
+            }
+            i++;
+        }
+    }
 }
