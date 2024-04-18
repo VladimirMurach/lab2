@@ -8,7 +8,7 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 public class Calculator {
 
-    ArrayList<ArrayList<Double>> calculate(ArrayList<DescriptiveStatistics> importData) {
+    public ArrayList<ArrayList<Double>> calculate(ArrayList<DescriptiveStatistics> importData) {
         ArrayList<ArrayList<Double>> result = new ArrayList<>();
         for (int i = 0; i < importData.size(); i++) {
             result.add(new ArrayList<>());
@@ -29,7 +29,7 @@ public class Calculator {
         return result;
     }
 
-    RealMatrix covariance(double[][] covImportData) {
+    public RealMatrix covariance(double[][] covImportData) {
         Covariance cov = new Covariance(covImportData);
         return cov.getCovarianceMatrix();
     }

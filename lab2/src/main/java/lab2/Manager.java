@@ -2,7 +2,6 @@ package lab2;
 
 import java.io.File;
 import java.io.IOException;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 public class Manager {
 
@@ -13,21 +12,21 @@ public class Manager {
     private String sheetName = null;
     private int sheetNumber = 0;
 
-    void importFile(File file) throws IOException, InvalidFormatException {
-        storage.setImportData(reader.read(file, sheetName, sheetNumber));
-        storage.setSampleNames(reader.readNames(file, sheetName, sheetNumber));
+    public void importFile(File file) {
+        reader.openFile(file, sheetName, sheetNumber);
+        storage.setImportData(reader.read());
+        storage.setSampleNames(reader.readNames());
         storage.toDoubleArray();
-        System.out.println("Импорт завершен!");
         sheetName = null;
     }
 
-    void exportFile() throws IOException {
+    public void exportFile() throws IOException {
         calculate();
         writer.write(storage.getExportData(), storage.getSampleNames(), storage.getCovExportData());
         System.out.println("Экспорт завершен!");
     }
 
-    void calculate() {
+    public void calculate() {
         storage.setExportData(calculator.calculate(storage.getImportData()));
         storage.setCovExportData(calculator.covariance(storage.getCovImportData()));
     }

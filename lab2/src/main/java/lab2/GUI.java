@@ -217,20 +217,7 @@ public class GUI extends javax.swing.JFrame {
         }
         chooseSheetWindow.dispose();
         textField.setText("");
-        try {
-            manager.importFile(fileChooser.getSelectedFile());
-        } catch (NotOfficeXmlFileException | POIXMLException e) {
-            System.out.println("Выбран не Excel файл");
-        } catch (IOException ex) {
-            System.out.println("Ошибка ввода/вывода");
-        } catch (NullPointerException e) {
-            System.out.println("Не выбран файл или листа не существует");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Листа не существует");
-        } catch (InvalidFormatException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        manager.importFile(fileChooser.getSelectedFile());
     }//GEN-LAST:event_okButtonActionPerformed
 
     /**

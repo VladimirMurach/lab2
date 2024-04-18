@@ -53,13 +53,18 @@ public class Storage {
     }
 
     public void toDoubleArray() {
-        covImportData = new double[(int) importData.get(0).getN()][importData.size()];
-        int i = 0;
-        for (DescriptiveStatistics sample : importData) {
-            for (int j = 0; j < sample.getN(); j++) {
-                covImportData[j][i] = sample.getElement(j);
+        try {
+            covImportData = new double[(int) importData.get(0).getN()][importData.size()];
+            int i = 0;
+            for (DescriptiveStatistics sample : importData) {
+                for (int j = 0; j < sample.getN(); j++) {
+                    covImportData[j][i] = sample.getElement(j);
+                }
+                i++;
             }
-            i++;
+            System.out.println("Импорт завершен!");
+        } catch (IndexOutOfBoundsException e) {
+
         }
     }
 }
